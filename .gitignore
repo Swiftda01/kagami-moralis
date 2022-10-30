@@ -1,0 +1,4 @@
+*.DS_Store
+/cloud-functions
+TODO.md
+.angular/

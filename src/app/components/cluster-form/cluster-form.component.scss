@@ -1,0 +1,32 @@
+#cluster-form {
+	.form-field {
+		width: 100%;
+	}
+
+	#add-addresses {
+		display: inline-block;
+		width: 100%;
+
+		.form-field {
+			width: 80%;
+		}
+
+		#button {
+			width: 20%;
+			padding-left: 10px;
+			cursor: pointer;
+		}
+	}
+
+	#addresses {
+		padding-bottom: 20px;
+
+		.remove-cell {
+			padding-left: 10px;
+		}
+	
+		.remove-icon {
+			cursor: pointer;
+		}
+	}
+}

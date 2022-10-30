@@ -1,0 +1,42 @@
+<div id="cluster-form">
+	<h2 mat-dialog-title>Create Cluster</h2>
+	<mat-dialog-content class="mat-typography">
+		<mat-form-field appearance="fill" class="form-field">
+			<mat-label>Name</mat-label>
+			<input matInput required [(ngModel)]="cluster.name">
+		</mat-form-field>
+		<mat-form-field appearance="fill" class="form-field">
+			<mat-label>Description</mat-label>
+			<textarea matInput required [(ngModel)]="cluster.description"></textarea>
+		</mat-form-field>
+		<div id="add-addresses">
+			<mat-form-field appearance="fill" class="form-field">
+				<mat-label>Add wallet address</mat-label>
+				<input matInput [(ngModel)]="currentAddedAddress">
+			</mat-form-field>
+			<mat-icon id="button" (click)="addAddress()">add</mat-icon>
+		</div>
+
+		<mat-table [dataSource]="cluster.addresses" id="addresses" class="mat-elevation-z0">
+
+			<ng-container matColumnDef="address">
+				<mat-header-cell *matHeaderCellDef>Wallets in cluster</mat-header-cell>
+				<mat-cell *matCellDef="let address">{{ address }}</mat-cell>
+			</ng-container>
+		
+			<ng-container matColumnDef="remove">
+				<mat-header-cell *matHeaderCellDef></mat-header-cell>
+				<mat-cell *matCellDef="let address" class="remove-cell"><mat-icon class="remove-icon" (click)="removeAddress(address)">remove</mat-icon></mat-cell>
+			</ng-container>
+		
+			<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+			<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+		</mat-table>
+	</mat-dialog-content>
+
+	<mat-dialog-actions align="end">
+		<button mat-button mat-dialog-close>Cancel</button>
+		<button mat-button [mat-dialog-close]="true" (click)="delete()" *ngIf="cluster.id">Delete</button>
+		<button mat-button [mat-dialog-close]="true" cdkFocusInitial [disabled]="!cluster.name || !cluster.description" (click)="save()">Save</button>
+	</mat-dialog-actions>
+</div>

@@ -1,0 +1,22 @@
+#clusters {
+	padding: 20px;
+
+	.table {
+		width: 100%;
+		background-color: #FAFAFA;
+
+		.cell {
+			padding-top: 15px
+		}
+	}
+	
+	.mat-row .mat-cell {
+		border-bottom: 1px solid transparent;
+		border-top: 1px solid transparent;
+		cursor: pointer;
+	}
+	
+	.mat-row:hover .mat-cell {
+		background-color: rgb(128, 128, 128, 0.1);
+	}
+}

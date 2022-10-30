@@ -1,0 +1,46 @@
+<div id="dashboard">
+  <mat-toolbar class="mat-elevation-z8">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">
+        menu
+      </mat-icon>
+      <mat-icon *ngIf="sidenav.opened">
+        close
+      </mat-icon>
+    </button>
+  
+    <span>Kagami</span>
+    <span class="spacer"></span>
+    <!-- Content displayed to the right of the toolbar can go here -->
+  
+  </mat-toolbar>
+  
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+  
+      <p>{{ shortenedWalletAddress }}</p>
+  
+      <mat-divider></mat-divider>
+  
+      <button mat-button class="menu-button" (click)="openSegment('main')">
+        <mat-icon>table_chart</mat-icon>
+        <span>Clusters</span>
+      </button>
+  
+      <button mat-button class="menu-button" (click)="logOut()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Log Out</span>
+      </button>
+  
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+  
+      <div *ngIf="segment === 'main'">
+        <clusters [clusters]="clusters"></clusters>
+      </div>
+  
+  
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
