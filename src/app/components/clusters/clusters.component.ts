@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ClusterFormComponent } from '../cluster-form/cluster-form.component';
 import { MoralisService } from '../../services/moralis/moralis.service';
 import { Cluster } from '../../models/cluster';
+import { Policy } from '../../models/policy';
 
 @Component({
 	selector: 'clusters',
@@ -12,7 +13,10 @@ import { Cluster } from '../../models/cluster';
 
 export class ClustersComponent implements OnInit {
 
-	@Input() clusters;
+	@Input() clusters: Cluster[];
+	@Input() policies: Policy[];
+
+	@Output() clustersChangedEvent = new EventEmitter<Cluster[]>();
 
 	displayedColumns: string[] = ['name', 'description', 'addresses'];
 
@@ -24,12 +28,15 @@ export class ClustersComponent implements OnInit {
 	ngOnInit(): void { }
 
 	openEditClusterDialog(cluster) {
-		const editClusterDialogRef = this.dialog.open(ClusterFormComponent);
+		const editClusterDialogRef = this.dialog.open(ClusterFormComponent, {
+			panelClass: 'dialog'
+		});
 
 		editClusterDialogRef.componentInstance.id = cluster.id;
 		editClusterDialogRef.componentInstance.name = cluster.name;
 		editClusterDialogRef.componentInstance.description = cluster.description;
 		editClusterDialogRef.componentInstance.addresses = cluster.addresses;
+		editClusterDialogRef.componentInstance.numPolicies = this._numPolicies(cluster);
 
 		editClusterDialogRef.afterClosed().subscribe(result => {
 			if (!result) { return; }
@@ -44,19 +51,24 @@ export class ClustersComponent implements OnInit {
 					cluster.addresses = moralisCluster.attributes.addresses;
 
 					this.clusters = [...this.clusters];
+					this._emitUpdatedClusters();
 				});
 			} else if (deletedCluster) {
 				this.moralisService.deleteCluster(cluster).then(moralisCluster => {
 					this.clusters = this.clusters.filter(existingCluster => {
 						return existingCluster.id !== moralisCluster.id;
 					});
+
+					this._emitUpdatedClusters();
 				});
 			}
 		});
 	}
 
 	openAddClusterDialog() {
-		const addClusterDialogRef = this.dialog.open(ClusterFormComponent);
+		const addClusterDialogRef = this.dialog.open(ClusterFormComponent, {
+			panelClass: 'dialog'
+		});
 
 		addClusterDialogRef.afterClosed().subscribe(result => {
 			if (!result) { return; }
@@ -72,9 +84,18 @@ export class ClustersComponent implements OnInit {
 					newCluster.addresses = moralisCluster.attributes.addresses;
 
 					this.clusters = [...this.clusters, newCluster];
+					this._emitUpdatedClusters();
 				});
 			}
 		});
+	}
+
+	private _emitUpdatedClusters() {
+		this.clustersChangedEvent.emit(this.clusters);
+	}
+
+	private _numPolicies(cluster) {
+		return this.policies.filter(policy => policy.clusterId === cluster.id).length;
 	}
 
 }

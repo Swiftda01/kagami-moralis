@@ -20,6 +20,9 @@ import { LandingComponent } from './components/landing/landing.component';
 import { ClustersComponent } from './components/clusters/clusters.component';
 import { MatTableModule } from '@angular/material/table';
 import { ClusterFormComponent } from './components/cluster-form/cluster-form.component';
+import { PoliciesComponent } from './components/policies/policies.component';
+import { ToastrModule } from 'ngx-toastr';
+import { PolicyFormComponent } from './components/policy-form/policy-form.component';
 
 @NgModule({
 	declarations: [
@@ -27,7 +30,9 @@ import { ClusterFormComponent } from './components/cluster-form/cluster-form.com
 		DashboardComponent,
 		LandingComponent,
 		ClustersComponent,
-		ClusterFormComponent
+		ClusterFormComponent,
+		PoliciesComponent,
+		PolicyFormComponent
 	],
 	imports: [
 		BrowserModule,
@@ -44,7 +49,12 @@ import { ClusterFormComponent } from './components/cluster-form/cluster-form.com
 		MatDialogModule,
 		MatFormFieldModule,
 		MatSelectModule,
-		FormsModule
+		FormsModule,
+		BrowserAnimationsModule,
+		ToastrModule.forRoot({
+			positionClass: 'toast-bottom-right',
+			preventDuplicates: true,
+		})
 	],
 	providers: [],
 	bootstrap: [AppComponent]

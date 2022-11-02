@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~10.0.9",
+    "@angular/animations": "^10.2.5",
     "@angular/cdk": "^10.2.7",
     "@angular/common": "~10.0.9",
     "@angular/compiler": "~10.0.9",
@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~10.0.9",
     "@angular/router": "~10.0.9",
     "moralis-v1": "^1.11.0",
+    "ngx-toastr": "13.2.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.4.0",
     "zone.js": "~0.10.3"

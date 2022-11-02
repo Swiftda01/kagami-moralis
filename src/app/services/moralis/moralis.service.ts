@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Cluster } from '../../models/cluster';
+import { Policy } from '../../models/policy';
 import { environment } from './../../../environments/environment';
 
 const serverUrl = environment.server_url;
@@ -89,8 +90,84 @@ export class MoralisService {
 		return this._query('Cluster').get(clusterId);
 	}
 
+	async createPolicy(policy: Policy) {
+		return this._getCluster(policy.clusterId).then(moralisParentCluster => {
+			const MoralisPolicy = this._moralisObject('Policy');
+			const moralisPolicy = new MoralisPolicy();
+
+			moralisPolicy.setACL(new Moralis.ACL(this.user));
+
+			moralisPolicy.set('cluster', moralisParentCluster);
+			moralisPolicy.set('type', policy.type);
+			moralisPolicy.set('recipients', policy.recipients);
+			moralisPolicy.set('rules', policy.rules);
+
+			return moralisPolicy.save().then(
+				(savedPolicy) => {
+					console.log('New policy created with objectId: ' + savedPolicy.id);
+					return savedPolicy;
+				},
+				(error) => {
+					console.log('Failed to create new policy, with error code: ' + error.message);
+				}
+			);
+		});
+
+	}
+
+	async updatePolicy(policy: Policy) {
+		return this._getPolicy(policy.id).then(
+			(moralisPolicy) => {
+				moralisPolicy.set('type', policy.type);
+				moralisPolicy.set('recipients', policy.recipients);
+				moralisPolicy.set('rules', policy.rules);
+
+				return moralisPolicy.save().then(
+					(savedPolicy) => {
+						console.log('Updated policy with objectId: ' + savedPolicy.id);
+						return savedPolicy;
+					},
+					(error) => {
+						console.log('Failed to update policy, with error code: ' + error.message);
+					}
+				);
+			},
+			(error) => {
+				console.log('Failed to get policy, with error code: ' + error.message);
+			}
+		);
+	}
+
+	async deletePolicy(policy: Policy) {
+		return this._getPolicy(policy.id).then(
+			(moralisPolicy) => {
+				return moralisPolicy.destroy().then(
+					(deletedPolicy) => {
+						console.log('Deleted policy with objectId: ' + deletedPolicy.id);
+
+						return deletedPolicy;
+					},
+					(error) => {
+						console.log('Failed to delete policy, with error code: ' + error.message);
+					}
+				);
+			},
+			(error) => {
+				console.log('Failed to get policy, with error code: ' + error.message);
+			}
+		);
+	}
+
+	async getPolicies() {
+		return this._query('Policy').find();
+	}
+
+	private async _getPolicy(policyId: string) {
+		return this._query('Policy').get(policyId);
+	}
+
 	private _query(objectName: string) {
-		return new Moralis.Query(this._moralisObject('Cluster'));
+		return new Moralis.Query(this._moralisObject(objectName));
 	}
 
 	private _moralisObject(objectName: string) {
@@ -105,7 +182,7 @@ export class MoralisService {
 	}
 
 	async logOutUser() {
-		await Moralis.User.logOut();
+		Moralis.User.logOut();
 	}
 
 	async getCurrentUser() {
