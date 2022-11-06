@@ -16,7 +16,7 @@ export class PolicyFormComponent implements OnInit {
 	@Input() id: string;
 	@Input() clusterId: string;
 	@Input() type: string;
-	@Input() rules: any;
+	@Input() rules: any = {};
 	@Input() recipients: string[];
 
 	policy: Policy;
@@ -74,7 +74,7 @@ export class PolicyFormComponent implements OnInit {
 	}
 
 	private _validCurrentAddedAddress() {
-		const validEmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		const validEmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		return validEmailRegex.test(this.currentAddedAddress.toLocaleLowerCase());
 	}
 
@@ -84,7 +84,12 @@ export class PolicyFormComponent implements OnInit {
 		this.policy.clusterId = this.clusterId;
 		this.policy.type = this.type;
 		this.policy.recipients = this.recipients || [];
-		this.policy.rules = this.rules || {};
+
+		for (const rule in this.rules) {
+			if (this.rules.hasOwnProperty(rule)) {
+				this.policy.rules[rule] = this.rules[rule];
+			}
+		}
 	}
 
 }

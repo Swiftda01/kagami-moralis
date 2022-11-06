@@ -37,3 +37,128 @@ $angular-moralis-theme: mat-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.main-header {
+  height: 36px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.primary-button {
+  background-color: #f1f1f1;
+  color: black !important;
+}
+
+.secondary-button {
+  background-color: #ff5ba5;
+  color: white;
+  font-weight: bold;
+}
+
+#toast-container .toast-error {
+  background-color: #9c004b;
+  color: white;
+}
+
+.dialog {
+  .header {
+    padding: 24px;
+    background-color: #d31876;
+    color: white;
+    font-weight: bold;
+
+    h2 {
+      padding: 10px;
+      margin: 0;
+    }
+  }
+
+  .form-field {
+    width: 100%;
+  }
+
+  .mat-dialog-content {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mat-form-field-flex {
+    /* Form field */
+    background-color: transparent !important;
+  }
+
+  .mat-focused .mat-form-field-label {
+    /* Label */
+    color: #d31876 !important;
+   }
+
+   .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    /* Label when invalid */
+    color: #d31876 !important;
+  }
+
+  .mat-form-field.mat-form-field-invalid .mat-form-field-label .mat-form-field-required-marker {
+    /* Asterisk when invalid */
+    color: #d31876 !important;
+  }
+  
+   .mat-form-field-underline {
+    /* Underline */
+    background-color: #d31876 !important;
+  } 
+  
+  .mat-form-field-ripple {
+   /* Underline when focused */
+   background-color: #d31876 !important;
+  }
+
+  .generic-fields {
+    padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  
+  .addresses {
+    padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    .add-addresses {
+      display: inline-block;
+      width: 100%;
+  
+      .form-field {
+        width: 80%;
+      }
+  
+      .button {
+        width: 20%;
+        padding-left: 10px;
+        cursor: pointer;
+      }
+    }
+
+    .remove-icon {
+      cursor: pointer;
+    }
+
+    .remove-cell {
+      padding-left: 10px;
+    }
+  }
+
+  .buttons {
+    padding: 24px;
+  }
+
+  mat-dialog-container {
+    padding: 0;
+  }
+
+  @media (max-width: 1040) {
+    max-width: 760px;
+  }
+}

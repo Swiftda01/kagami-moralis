@@ -1,6 +1,6 @@
-# APP NAME
+# Kagami
 
-APP DESCRIPTION
+Create clusters of wallets to apply behavioural monitoring policies to, and trigger notifications when these policies are breached.
 
 ## Installation
 

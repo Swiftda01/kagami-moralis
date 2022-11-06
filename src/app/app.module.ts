@@ -53,7 +53,7 @@ import { PolicyFormComponent } from './components/policy-form/policy-form.compon
 		BrowserAnimationsModule,
 		ToastrModule.forRoot({
 			positionClass: 'toast-bottom-right',
-			preventDuplicates: true,
+			preventDuplicates: true
 		})
 	],
 	providers: [],

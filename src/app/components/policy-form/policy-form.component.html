@@ -1,63 +1,75 @@
 <div id="policy-form">
-	<h2 mat-dialog-title>Policy</h2>
+	<div class="header">
+		<h2 mat-dialog-title> {{ !this.policy.id ? 'Create' : 'Update' }} Policy</h2>
+	</div>
+
 	<mat-dialog-content class="mat-typography">
-		<mat-form-field appearance="fill" class="form-field">
-			<mat-label>Cluster</mat-label>
-			<mat-select required [disabled]="!!policy.id" [(ngModel)]="policy.clusterId">
-				<mat-option *ngFor="let cluster of clusters" [value]="cluster.id">
-					{{ cluster.name }}
-				</mat-option>
-			</mat-select>
-		</mat-form-field>
-
-		<mat-form-field appearance="fill" class="form-field">
-			<mat-label>Type</mat-label>
-			<mat-select required [disabled]="!!policy.id" [(ngModel)]="policy.type">
-				<mat-option *ngFor="let type of types" [value]="type">
-					{{ type }}
-				</mat-option>
-			</mat-select>
-		</mat-form-field>
-
-		<div></div>
-		<div id="limit" *ngIf="policy.type === 'limit'">
-			<p><strong>Maximum cluster outflows in one day</strong></p>
-			<p>Check that business expenses or portfolio trading is within limits</p>
-
-			<mat-form-field appearance="fill" class="form-field">
-				<mat-label>MATIC</mat-label>
-				<input matInput type="number" min="0" required [(ngModel)]="policy.rules.max">
-			</mat-form-field>
+		<div class="generic-fields">
+			<div class="form-fields">
+				<mat-form-field appearance="fill" class="form-field">
+					<mat-label>Cluster</mat-label>
+					<mat-select required [disabled]="!!policy.id" [(ngModel)]="policy.clusterId">
+						<mat-option *ngFor="let cluster of clusters" [value]="cluster.id">
+							{{ cluster.name }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+	
+				<mat-form-field appearance="fill" class="form-field">
+					<mat-label>Type</mat-label>
+					<mat-select required [disabled]="!!policy.id" [(ngModel)]="policy.type">
+						<mat-option *ngFor="let type of types" [value]="type">
+							{{ type }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
 		</div>
 
-		<div id="add-addresses">
-			<mat-form-field appearance="fill" class="form-field">
-				<mat-label>Recipient email</mat-label>
-				<input matInput [(ngModel)]="currentAddedAddress">
-			</mat-form-field>
-			<mat-icon id="button" (click)="addAddress()">add</mat-icon>
+		<div *ngIf="policy.type" class="type-specific-form">
+			<div id="limit" *ngIf="policy.type === 'limit'">
+				<p><strong>Maximum cluster outflows in one day</strong></p>
+				<p>Check that business expenses or portfolio trading is within limits</p>
+
+				<mat-form-field appearance="fill" class="form-field">
+					<mat-label>MATIC</mat-label>
+					<input matInput type="number" min="0" required [(ngModel)]="policy.rules.max">
+				</mat-form-field>
+			</div>
 		</div>
 
-		<mat-table [dataSource]="policy.recipients" id="addresses" class="mat-elevation-z0">
+		<div class="addresses">
+			<div class="add-addresses">
+				<mat-form-field appearance="fill" class="form-field">
+					<mat-label>Recipient email</mat-label>
+					<input matInput [(ngModel)]="currentAddedAddress">
+				</mat-form-field>
+				<mat-icon class="button" (click)="addAddress()">add</mat-icon>
+			</div>
 
-			<ng-container matColumnDef="email address">
-				<mat-header-cell *matHeaderCellDef>Recipients</mat-header-cell>
-				<mat-cell *matCellDef="let address">{{ address }}</mat-cell>
-			</ng-container>
-		
-			<ng-container matColumnDef="remove">
-				<mat-header-cell *matHeaderCellDef></mat-header-cell>
-				<mat-cell *matCellDef="let address" class="remove-cell"><mat-icon class="remove-icon" (click)="removeAddress(address)">remove</mat-icon></mat-cell>
-			</ng-container>
-		
-			<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-			<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-		</mat-table>
+			<mat-table [dataSource]="policy.recipients" class="addresses" class="mat-elevation-z0">
+
+				<ng-container matColumnDef="email address">
+					<mat-header-cell *matHeaderCellDef>Recipients</mat-header-cell>
+					<mat-cell *matCellDef="let address">{{ address }}</mat-cell>
+				</ng-container>
+			
+				<ng-container matColumnDef="remove">
+					<mat-header-cell *matHeaderCellDef></mat-header-cell>
+					<mat-cell *matCellDef="let address" class="remove-cell"><mat-icon class="remove-icon" (click)="removeAddress(address)">remove</mat-icon></mat-cell>
+				</ng-container>
+			
+				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+				<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+			</mat-table>
+		</div>
 	</mat-dialog-content>
 
-	<mat-dialog-actions align="end">
-		<button mat-button mat-dialog-close>Cancel</button>
-		<button mat-button [mat-dialog-close]="true" (click)="delete()" *ngIf="!!policy.id">Delete</button>
-		<button mat-button [mat-dialog-close]="true" cdkFocusInitial [disabled]="FormValid()" (click)="save()">Save</button>
-	</mat-dialog-actions>
+	<div class="buttons">
+		<mat-dialog-actions align="end">
+			<button mat-button mat-dialog-close>Cancel</button>
+			<button mat-button [mat-dialog-close]="true" (click)="delete()" *ngIf="!!policy.id">Delete</button>
+			<button mat-button [mat-dialog-close]="true" cdkFocusInitial [disabled]="FormValid()" (click)="save()">Save</button>
+		</mat-dialog-actions>
+	</div>
 </div>

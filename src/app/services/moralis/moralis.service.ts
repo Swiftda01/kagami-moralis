@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Cluster } from '../../models/cluster';
 import { Policy } from '../../models/policy';
 import { environment } from './../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 const serverUrl = environment.server_url;
 const appId = environment.app_id;
@@ -17,7 +18,7 @@ Moralis.start({ serverUrl, appId });
 export class MoralisService {
 	user: any;
 
-	constructor() { }
+	constructor(private toastr: ToastrService) { }
 
 	async createCluster(cluster: Cluster) {
 		const MoralisCluster = this._moralisObject('Cluster');
@@ -176,7 +177,19 @@ export class MoralisService {
 
 	async authenticateCurrentUser() {
 		await this.getCurrentUser();
-		if (!this.user) { this.user = await Moralis.authenticate(); }
+		if (!this.user) {
+			await Moralis.authenticate().then(
+				(user) => {
+					this.user = user;
+				},
+				(error) => {
+					console.log(error);
+					let errorMessage;
+					if (typeof error === 'object') { errorMessage = error.message; }
+					this.toastr.error(errorMessage || error);
+				}
+			);
+		}
 		this.user.setACL(new Moralis.ACL(this.user));
 		return this.user;
 	}

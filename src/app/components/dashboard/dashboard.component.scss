@@ -1,45 +1,45 @@
 #dashboard {
+	#address {
+		margin-top: 7px;
+	}
+
 	mat-toolbar {
-		background: dimgrey;
+		background: #D31876;
 		color: white;
 	}
-	
+
 	mat-sidenav {
 		margin-right: 16px;
 		width: 200px;
 		border-right: none;
-		background: grey;
-		color: white;
+		background: #f1f1f1;
+		color: black;
 		padding: 16px;
 		text-align: center;
 	}
-	
+
 	mat-sidenav-container {
 		height: calc(100vh - 65px);
 	}
-	
+
 	.menu-button {
 		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
 		font-size: 1rem;
-	
+
 		mat-icon {
 			margin-right: 8px;
 		}
 	}
-	
-	.spacer {
-		flex: 1 1 auto;
-	}
-	
+
 	mat-divider {
 		margin-top: 16px;
 		margin-bottom: 16px;
 		background-color: rgba(255, 255, 255, 0.5);
 	}
-	
+
 	@media screen and (min-width: 800px) {
 		.form {
 			padding-left: 15px;

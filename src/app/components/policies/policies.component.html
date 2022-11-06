@@ -3,7 +3,9 @@
 	<table mat-table [dataSource]="policies" class="mat-elevation-z0 table">
 		<ng-container matColumnDef="cluster">
 			<th mat-header-cell *matHeaderCellDef>Cluster</th>
-			<td mat-cell *matCellDef="let policy" class="cell">{{ policy.cluster.name }}</td>
+			<td mat-cell *matCellDef="let policy" class="cell">
+				{{ policy.cluster.name }}
+			</td>
 		</ng-container>
 
 		<ng-container matColumnDef="type">
@@ -12,23 +14,33 @@
 		</ng-container>
 
 		<ng-container matColumnDef="rules">
-			<th mat-header-cell *matHeaderCellDef>Rules</th>
+			<th mat-header-cell *matHeaderCellDef>MATIC Per Day</th>
 			<td mat-cell *matCellDef="let policy" class="cell">
 				<table>
 					<tr *ngFor="let rule of listOf(policy.rules)">
-						<td>{{ rule[0] }}:</td>
 						<td>{{ rule[1] }}</td>
 					</tr>
 				</table>
 			</td>
 		</ng-container>
-	
+
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 		<tr
 			mat-row
 			(click)="openEditPolicyDialog(row)"
-			*matRowDef="let row; columns: displayedColumns;"
+			*matRowDef="let row; columns: displayedColumns"
 		></tr>
 	</table>
-	<button mat-button (click)="openAddPolicyDialog()">Create policy</button>
+
+	<div class="add-button">
+		<button
+			mat-mini-fab
+			color="secondary"
+			class="secondary-button"
+			aria-label="Create policy"
+			(click)="openAddPolicyDialog()"
+		>
+			<mat-icon>add</mat-icon>
+		</button>
+	</div>
 </div>

@@ -3,25 +3,41 @@
 	<table mat-table [dataSource]="clusters" class="mat-elevation-z0 table">
 		<ng-container matColumnDef="name">
 			<th mat-header-cell *matHeaderCellDef>Name</th>
-			<td mat-cell *matCellDef="let cluster" class="cell">{{ cluster.name }}</td>
+			<td mat-cell *matCellDef="let cluster" class="cell">
+				{{ cluster.name }}
+			</td>
 		</ng-container>
-	
+
 		<ng-container matColumnDef="description">
 			<th mat-header-cell *matHeaderCellDef>Description</th>
-			<td mat-cell *matCellDef="let cluster" class="cell">{{ cluster.description }}</td>
+			<td mat-cell *matCellDef="let cluster" class="cell">
+				{{ cluster.description }}
+			</td>
 		</ng-container>
 
 		<ng-container matColumnDef="addresses">
 			<th mat-header-cell *matHeaderCellDef>Wallet Addresses</th>
-			<td mat-cell *matCellDef="let cluster" class="cell">{{ cluster.addresses.length }}</td>
+			<td mat-cell *matCellDef="let cluster" class="cell">
+				{{ cluster.addresses.length }}
+			</td>
 		</ng-container>
-	
+
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 		<tr
 			mat-row
 			(click)="openEditClusterDialog(row)"
-			*matRowDef="let row; columns: displayedColumns;"
+			*matRowDef="let row; columns: displayedColumns"
 		></tr>
 	</table>
-	<button mat-button (click)="openAddClusterDialog()">Create cluster</button>
+	<div class="add-button">
+		<button
+			mat-mini-fab
+			color="secondary"
+			class="secondary-button"
+			aria-label="Create cluster"
+			(click)="openAddClusterDialog()"
+		>
+			<mat-icon>add</mat-icon>
+		</button>
+	</div>
 </div>

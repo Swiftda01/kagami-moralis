@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PolicyFormComponent } from '../policy-form/policy-form.component';
 import { MoralisService } from '../../services/moralis/moralis.service';
 import { Policy } from '../../models/policy';
-import { Cluster } from 'src/app/models/cluster';
+import { Cluster } from '../../models/cluster';
 
 @Component({
 	selector: 'policies',

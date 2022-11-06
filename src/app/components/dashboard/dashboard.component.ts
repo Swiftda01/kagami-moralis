@@ -16,7 +16,7 @@ import { Policy } from '../../models/policy';
 export class DashboardComponent implements OnInit {
 	@ViewChild(MatSidenav)
 	sidenav!: MatSidenav;
-	segment = 'policies';
+	segment = 'clusters';
 
 	public user: any;
 	public walletAddress: string;
