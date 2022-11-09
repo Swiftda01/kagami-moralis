@@ -6,8 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 
 const serverUrl = environment.server_url;
 const appId = environment.app_id;
-const chain = environment.chain;
-const tokenAddress = environment.token_address;
+// const chain = environment.chain;
+// const tokenAddress = environment.token_address;
 
 const Moralis = require('moralis-v1');
 Moralis.start({ serverUrl, appId });
@@ -165,6 +165,10 @@ export class MoralisService {
 
 	private async _getPolicy(policyId: string) {
 		return this._query('Policy').get(policyId);
+	}
+
+	async getBreaches() {
+		return this._query('Breach').find();
 	}
 
 	private _query(objectName: string) {

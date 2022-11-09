@@ -6,6 +6,7 @@ import { delay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Cluster } from '../../models/cluster';
 import { Policy } from '../../models/policy';
+import { Breach } from '../../models/breach';
 
 @Component({
 	selector: 'dashboard',
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
 	public nfts: any = [];
 	public clusters: Cluster[];
 	public policies: Policy[];
+	public breaches: Breach[];
 
 	constructor(
 		private moralisService: MoralisService,
@@ -35,7 +37,7 @@ export class DashboardComponent implements OnInit {
 		this._initializeComponent();
 	}
 
-	openSegment(segmentName: 'clusters' | 'policies') {
+	openSegment(segmentName: 'clusters' | 'policies' | 'breaches') {
 		this.segment = segmentName;
 	}
 
@@ -58,6 +60,7 @@ export class DashboardComponent implements OnInit {
 		await this._authenticateCurrentUser();
 		await this._getClusters();
 		await this._getPolicies();
+		await this._getBreaches();
 	}
 
 	private async _authenticateCurrentUser() {
@@ -103,6 +106,24 @@ export class DashboardComponent implements OnInit {
 			});
 
 			return policy;
+		});
+	}
+
+	private async _getBreaches() {
+		const moralisBreaches = await this.moralisService.getBreaches();
+
+		this.breaches = moralisBreaches.map(moralisBreach => {
+			const breach = new Breach();
+			breach.id = moralisBreach.id;
+			breach.occurredAt = moralisBreach.attributes.updatedAt;
+			breach.policyId = moralisBreach.attributes.policy.id;
+			breach.rules = moralisBreach.attributes.rules;
+			breach.violation = moralisBreach.attributes.violation;
+			breach.policy = this.policies.find(policy => {
+				return breach.policyId === policy.id;
+			});
+
+			return breach;
 		});
 	}
 

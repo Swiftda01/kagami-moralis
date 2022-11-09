@@ -30,13 +30,18 @@
 			<mat-divider></mat-divider>
 
 			<button mat-button class="menu-button" (click)="openSegment('clusters')">
-				<mat-icon>table_chart</mat-icon>
+				<mat-icon>assignment</mat-icon>
 				<span>Clusters</span>
 			</button>
 
 			<button mat-button class="menu-button" (click)="openSegment('policies')">
 				<mat-icon>assignment_turned_in</mat-icon>
 				<span>Policies</span>
+			</button>
+
+			<button mat-button class="menu-button" (click)="openSegment('breaches')">
+				<mat-icon>assignment_late</mat-icon>
+				<span>Breaches</span>
 			</button>
 		</mat-sidenav>
 
@@ -55,6 +60,12 @@
 					[clusters]="clusters"
 					(policiesChangedEvent)="updatePolicies($event)"
 				></policies>
+			</div>
+
+			<div *ngIf="segment === 'breaches'">
+				<breaches
+					[breaches]="breaches"
+				></breaches>
 			</div>
 		</mat-sidenav-content>
 	</mat-sidenav-container>

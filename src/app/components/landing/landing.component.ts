@@ -15,15 +15,15 @@ export class LandingComponent implements OnInit {
 
 	ngOnInit() {
 		this.moralisService.getCurrentUser().then((user) => {
-			if (user !== null) { this._goToGame(); }
+			if (user !== null) { this._goToDashboard(); }
 		});
 	}
 
 	async logIn() {
-		this.moralisService.authenticateCurrentUser().then(() => this._goToGame());
+		this.moralisService.authenticateCurrentUser().then(() => this._goToDashboard());
 	}
 
-	private _goToGame() {
+	private _goToDashboard() {
 		this.router.navigate(['/dashboard']);
 	}
 }

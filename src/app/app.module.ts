@@ -23,6 +23,7 @@ import { ClusterFormComponent } from './components/cluster-form/cluster-form.com
 import { PoliciesComponent } from './components/policies/policies.component';
 import { ToastrModule } from 'ngx-toastr';
 import { PolicyFormComponent } from './components/policy-form/policy-form.component';
+import { BreachesComponent } from './components/breaches/breaches.component';
 
 @NgModule({
 	declarations: [
@@ -32,7 +33,8 @@ import { PolicyFormComponent } from './components/policy-form/policy-form.compon
 		ClustersComponent,
 		ClusterFormComponent,
 		PoliciesComponent,
-		PolicyFormComponent
+		PolicyFormComponent,
+		BreachesComponent
 	],
 	imports: [
 		BrowserModule,
