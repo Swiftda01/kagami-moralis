@@ -1,29 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { MoralisService } from '../../services/moralis/moralis.service';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { MoralisV1Service } from "../../services/moralis/moralisV1.service";
+import { Router } from "@angular/router";
 
 @Component({
-	selector: 'landing',
-	templateUrl: './landing.component.html',
-	styleUrls: ['./landing.component.scss']
+  selector: "landing",
+  templateUrl: "./landing.component.html",
+  styleUrls: ["./landing.component.scss"],
 })
 export class LandingComponent implements OnInit {
-	constructor(
-		private moralisService: MoralisService,
-		private router: Router
-	) { }
+  constructor(
+    private moralisService: MoralisV1Service,
+    private router: Router
+  ) {}
 
-	ngOnInit() {
-		this.moralisService.getCurrentUser().then((user) => {
-			if (user !== null) { this._goToDashboard(); }
-		});
-	}
+  ngOnInit() {
+    this.moralisService.getCurrentUser().then((user) => {
+      if (user !== null) {
+        this._goToDashboard();
+      }
+    });
+  }
 
-	async logIn() {
-		this.moralisService.authenticateCurrentUser().then(() => this._goToDashboard());
-	}
+  async logIn() {
+    this.moralisService
+      .authenticateCurrentUser()
+      .then(() => this._goToDashboard());
+  }
 
-	private _goToDashboard() {
-		this.router.navigate(['/dashboard']);
-	}
+  private _goToDashboard() {
+    this.router.navigate(["/dashboard"]);
+  }
 }

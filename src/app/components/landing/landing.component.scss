@@ -1,86 +1,86 @@
 #landing {
-	mat-toolbar {
-		background: #D31876;
-		color: white;
-	}
+  mat-toolbar {
+    background: #d31876;
+    color: white;
+  }
 
-	#jumbo {
-		background: #D31876;
-		height: 150px;
-		display: flex;
+  #jumbo {
+    background: #d31876;
+    height: 150px;
+    display: flex;
 
-		span {
-			color: white;
-			font-size: 2em;
-			padding-left: 5%;
-			align-self: flex-end;
-		}
-	}
+    span {
+      color: white;
+      font-size: 2em;
+      padding-left: 5%;
+      align-self: flex-end;
+    }
+  }
 
-	#wallets {
-		background: white;
-		height: 150px;
-		display: flex;
+  #wallets {
+    background: white;
+    height: 150px;
+    display: flex;
 
-		span {
-			color: #D31876;
-			font-size: 2em;
-			padding-left: 5%;
-			align-self: flex-start;
-		}
-	}
+    span {
+      color: #d31876;
+      font-size: 2em;
+      padding-left: 5%;
+      align-self: flex-start;
+    }
+  }
 
-	#columns {
-		background: white;
-		display: flex;
-		padding-left: 5%;
-		padding-right: 5%;
-		padding-bottom: 5%;
+  #columns {
+    background: white;
+    display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
 
-		#row {
-			.column {
-				background-color: #f1f1f1;
+    #row {
+      .column {
+        background-color: #f1f1f1;
 
-				.image, .text {
-					padding: 30px;
-					text-align: center;
-				}
+        .image,
+        .text {
+          padding: 30px;
+          text-align: center;
+        }
 
-				.image {
-					height: 200px;
-					display: flex;
-					justify-content: center;
-					align-items: center;
+        .image {
+          height: 200px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
 
-					img {
-						margin: auto;
-						display: block;
-					}
-				}
-			}
+          img {
+            margin: auto;
+            display: block;
+          }
+        }
+      }
+    }
 
-		}
+    @media screen and (min-width: 1000px) {
+      #row {
+        display: grid;
+        grid-template-columns: 33.3% 33.3% 33.3%;
+        grid-column-gap: 50px;
+        grid-row-gap: 30px;
+      }
+    }
+  }
 
-		@media screen and (min-width: 1000px) {
-			#row {
-				display: grid;
-				grid-template-columns: 33.3% 33.3% 33.3%;
-				grid-column-gap: 50px;
-				grid-row-gap: 30px;
-			}
-		}
-	}
+  @media screen and (max-width: 999px) {
+    #columns {
+      display: block;
 
-	@media screen and (max-width: 999px) {
-		#columns {
-			display: block;
-
-			#row {
-				.column {
-					width: 100%;
-					margin-bottom: 20px;
-				}
-			}
-		}
-	}
+      #row {
+        .column {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
 }

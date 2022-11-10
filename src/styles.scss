@@ -1,42 +1,54 @@
-
 // Custom Theming for Angular Material
+@use "@angular/material" as mat;
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat-core();
+@include mat.core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$angular-moralis-primary: mat-palette($mat-indigo);
-$angular-moralis-accent: mat-palette($mat-pink, A200, A100, A400);
+$angular-moralis-primary: mat.define-palette(mat.$indigo-palette);
+$angular-moralis-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
 
 // The warn palette is optional (defaults to red).
-$angular-moralis-warn: mat-palette($mat-red);
+$angular-moralis-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$angular-moralis-theme: mat-light-theme((
-  color: (
-    primary: $angular-moralis-primary,
-    accent: $angular-moralis-accent,
-    warn: $angular-moralis-warn,
+$angular-moralis-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $angular-moralis-primary,
+      accent: $angular-moralis-accent,
+      warn: $angular-moralis-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($angular-moralis-theme);
+@include mat.all-component-themes($angular-moralis-theme);
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .main-header {
   height: 36px;
@@ -93,26 +105,28 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .mat-focused .mat-form-field-label {
     /* Label */
     color: #d31876 !important;
-   }
+  }
 
-   .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  .mat-form-field.mat-form-field-invalid .mat-form-field-label {
     /* Label when invalid */
     color: #d31876 !important;
   }
 
-  .mat-form-field.mat-form-field-invalid .mat-form-field-label .mat-form-field-required-marker {
+  .mat-form-field.mat-form-field-invalid
+    .mat-form-field-label
+    .mat-form-field-required-marker {
     /* Asterisk when invalid */
     color: #d31876 !important;
   }
-  
-   .mat-form-field-underline {
+
+  .mat-form-field-underline {
     /* Underline */
     background-color: #d31876 !important;
-  } 
-  
+  }
+
   .mat-form-field-ripple {
-   /* Underline when focused */
-   background-color: #d31876 !important;
+    /* Underline when focused */
+    background-color: #d31876 !important;
   }
 
   .generic-fields {
@@ -120,7 +134,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding-left: 24px;
     padding-right: 24px;
   }
-  
+
   .addresses {
     padding-top: 24px;
     padding-left: 24px;
@@ -129,11 +143,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .add-addresses {
       display: inline-block;
       width: 100%;
-  
+
       .form-field {
         width: 80%;
       }
-  
+
       .button {
         width: 20%;
         padding-left: 10px;

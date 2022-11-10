@@ -1,72 +1,70 @@
 <div id="dashboard">
-	<mat-toolbar class="mat-elevation-z8">
-		<button
-			mat-icon-button
-			*ngIf="sidenav.mode === 'over'"
-			(click)="sidenav.toggle()"
-		>
-			<mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-			<mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-		</button>
+  <mat-toolbar class="mat-elevation-z8">
+    <button
+      mat-icon-button
+      *ngIf="sidenav.mode === 'over'"
+      (click)="sidenav.toggle()"
+    >
+      <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+    </button>
 
-		<img src="assets/images/Kagami_Logo_G.png" class="main-header">
+    <img src="assets/images/Kagami_Logo_G.png" class="main-header" />
 
-		<span class="spacer"></span>
-		<!-- Content displayed to the right of the toolbar goes here -->
-		<button
-			mat-stroked-button
-			color="primary"
-			class="primary-button"
-			(click)="logOut()"
-		>
-			Disconnect
-		</button>
-	</mat-toolbar>
+    <span class="spacer"></span>
+    <!-- Content displayed to the right of the toolbar goes here -->
+    <button
+      mat-stroked-button
+      color="primary"
+      class="primary-button"
+      (click)="logOut()"
+    >
+      Disconnect
+    </button>
+  </mat-toolbar>
 
-	<mat-sidenav-container>
-		<mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-			<p id="address">{{ shortenedWalletAddress }}</p>
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+      <p id="address">{{ shortenedWalletAddress }}</p>
 
-			<mat-divider></mat-divider>
+      <mat-divider></mat-divider>
 
-			<button mat-button class="menu-button" (click)="openSegment('clusters')">
-				<mat-icon>assignment</mat-icon>
-				<span>Clusters</span>
-			</button>
+      <button mat-button class="menu-button" (click)="openSegment('clusters')">
+        <mat-icon>assignment</mat-icon>
+        <span>Clusters</span>
+      </button>
 
-			<button mat-button class="menu-button" (click)="openSegment('policies')">
-				<mat-icon>assignment_turned_in</mat-icon>
-				<span>Policies</span>
-			</button>
+      <button mat-button class="menu-button" (click)="openSegment('policies')">
+        <mat-icon>assignment_turned_in</mat-icon>
+        <span>Policies</span>
+      </button>
 
-			<button mat-button class="menu-button" (click)="openSegment('breaches')">
-				<mat-icon>assignment_late</mat-icon>
-				<span>Breaches</span>
-			</button>
-		</mat-sidenav>
+      <button mat-button class="menu-button" (click)="openSegment('breaches')">
+        <mat-icon>assignment_late</mat-icon>
+        <span>Breaches</span>
+      </button>
+    </mat-sidenav>
 
-		<mat-sidenav-content>
-			<div *ngIf="segment === 'clusters'">
-				<clusters
-					[policies]="policies"
-					[clusters]="clusters"
-					(clustersChangedEvent)="updateClusters($event)"
-				></clusters>
-			</div>
+    <mat-sidenav-content>
+      <div *ngIf="segment === 'clusters'">
+        <clusters
+          [policies]="policies"
+          [clusters]="clusters"
+          (clustersChangedEvent)="updateClusters($event)"
+        ></clusters>
+      </div>
 
-			<div *ngIf="segment === 'policies'">
-				<policies
-					[policies]="policies"
-					[clusters]="clusters"
-					(policiesChangedEvent)="updatePolicies($event)"
-				></policies>
-			</div>
+      <div *ngIf="segment === 'policies'">
+        <policies
+          [policies]="policies"
+          [clusters]="clusters"
+          (policiesChangedEvent)="updatePolicies($event)"
+        ></policies>
+      </div>
 
-			<div *ngIf="segment === 'breaches'">
-				<breaches
-					[breaches]="breaches"
-				></breaches>
-			</div>
-		</mat-sidenav-content>
-	</mat-sidenav-container>
+      <div *ngIf="segment === 'breaches'">
+        <breaches [breaches]="breaches"></breaches>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

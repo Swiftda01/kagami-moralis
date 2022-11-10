@@ -1,31 +1,31 @@
 #policies {
-	padding: 20px;
+  padding: 20px;
 
-	h2 {
-		font-size: 1.5em;
-	}
+  h2 {
+    font-size: 1.5em;
+  }
 
-	.add-button {
-		margin-top: 20px;
-		text-align: right;
-	}
+  .add-button {
+    margin-top: 20px;
+    text-align: right;
+  }
 
-	.table {
-		width: 100%;
-		background-color: #FAFAFA;
+  .table {
+    width: 100%;
+    background-color: #fafafa;
 
-		.cell {
-			padding-top: 15px
-		}
-	}
+    .cell {
+      padding-top: 15px;
+    }
+  }
 
-	.mat-row .mat-cell {
-		border-bottom: 1px solid transparent;
-		border-top: 1px solid transparent;
-		cursor: pointer;
-	}
+  .mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
 
-	.mat-row:hover .mat-cell {
-		background-color: rgb(128, 128, 128, 0.1);
-	}
+  .mat-row:hover .mat-cell {
+    background-color: rgb(128, 128, 128, 0.1);
+  }
 }
