@@ -166,6 +166,16 @@ export class MoralisV1Service {
     });
   }
 
+  async getOrCreateToken() {
+    const tokens = await this.getAll("Token");
+
+    if (tokens.length === 0) {
+      const owner = this.user.attributes.ethAddress;
+      MoralisV1.Cloud.run("assignToken", { owner });
+      this.create("Token", { owner });
+    }
+  }
+
   async getAll(objectType: string) {
     return this._query(objectType).find();
   }

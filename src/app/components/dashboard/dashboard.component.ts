@@ -60,6 +60,7 @@ export class DashboardComponent implements OnInit {
     await this._getClusters();
     await this._getPolicies();
     await this._getBreaches();
+    this._getOrCreateToken();
   }
 
   private async _authenticateCurrentUser() {
@@ -127,6 +128,10 @@ export class DashboardComponent implements OnInit {
 
       return breach;
     });
+  }
+
+  private async _getOrCreateToken() {
+    this.moralisV1Service.getOrCreateToken();
   }
 
   private _goToLandingPage() {
